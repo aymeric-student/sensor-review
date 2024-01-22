@@ -1,0 +1,35 @@
+Dans cette solution, j'ai tenté d'adopter une approche différente de celle utilisée précédemment,
+en mettant davantage l'accent sur les principes SOLID. Contrairement à la première solution,
+j'ai choisi de ne pas suivre les étapes une par une.
+
+Tout d'abord, j'ai appliqué le principe de responsabilité unique en découpant les classes,
+comme c'est le cas pour SensorStateFactory.
+J'ai également pris en compte le principe d'ouverture/fermeture en utilisant le pattern State pour les différents états du capteur.
+
+En ce qui concerne le principe de substitution de Liskov,
+il était difficile de l'appliquer pleinement dans ce contexte.
+De plus, je préfère éviter l'héritage quand cela est possible, afin de réduire les problèmes de couplage entre les classes.
+
+J'ai aussi mis en œuvre le principe d'inversion de dépendance dans la classe qui génère les données aléatoires pour le capteur,
+au cas où nous déciderions un jour de changer de générateur de données
+(par exemple, pour un générateur de données réelles ou une API qui génère des nombres aléatoires).
+
+Enfin, j'ai simplifié le contenu du code en ajoutant la dépendance Lombok,
+qui permet de générer automatiquement les getters et les setters.
+
+- Construire l'image Docker
+
+docker build -t sensor .
+docker run -p 8080:8080 sensor -name sensor
+
+GET /api/temperature/history
+POST /api/temperature/limits
+
+body : {
+           "hot": 45.0,
+           "cold": 20.0
+       }
+
+GET /api/temperature/current
+
+
